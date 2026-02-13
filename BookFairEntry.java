@@ -236,32 +236,32 @@ public class BookFairEntry {
         delete.setFont(font1);
         frame.add(delete);
 
-        JLabel optout=new JLabel("Do you want to opt out of the Book Fair entry?");
-        optout.setBounds(10, 630, 450, 25);
-        optout.setFont(font2);
-        frame.add(optout);
+        // JLabel optout=new JLabel("Do you want to opt out of the Book Fair entry?");
+        // optout.setBounds(10, 630, 450, 25);
+        // optout.setFont(font2);
+        // frame.add(optout);
 
-        JRadioButton rbyes=new JRadioButton("Yes");
-        rbyes.setBounds(470, 630, 60, 20);
-        JRadioButton rbno=new JRadioButton("No");
-        rbno.setBounds(540, 630, 60, 20);
-        ButtonGroup bgdelete=new ButtonGroup();
-        bgdelete.add(rbyes);
-        bgdelete.add(rbno);
-        frame.add(rbyes);
-        frame.add(rbno);
+        // JRadioButton rbyes=new JRadioButton("Yes");
+        // rbyes.setBounds(470, 630, 60, 20);
+        // JRadioButton rbno=new JRadioButton("No");
+        // rbno.setBounds(540, 630, 60, 20);
+        // ButtonGroup bgdelete=new ButtonGroup();
+        // bgdelete.add(rbyes);
+        // bgdelete.add(rbno);
+        // frame.add(rbyes);
+        // frame.add(rbno);
 
         JLabel deletePhone=new JLabel("Enter your registered phone number");
-        deletePhone.setBounds(10, 670, 450, 25);
+        deletePhone.setBounds(10, 630, 450, 25);
         deletePhone.setFont(font2);
         frame.add(deletePhone);
         JTextField tfdel=new JTextField();
-        tfdel.setBounds(400, 670, 160, 25);
+        tfdel.setBounds(400, 630, 160, 25);
         frame.add(tfdel);
 
         // button
         JButton deleteButton=new JButton("Submit");
-        deleteButton.setBounds(400, 710, 160, 30);
+        deleteButton.setBounds(400, 670, 160, 30);
         deleteButton.setFont(new Font("comic sans Ms", Font.BOLD, 24));
         deleteButton.setFocusable(true);
         frame.add(deleteButton);
@@ -273,11 +273,20 @@ public class BookFairEntry {
                 if(p.isEmpty()){
                     JOptionPane.showMessageDialog(frame,"Required data missing", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                //deleting from db
-                deleteDataFromDB(p);
+                else{
+                    int res=JOptionPane.showConfirmDialog(null,"Do you want to opt out of Book Fair Entry?","Confirm",JOptionPane.YES_NO_CANCEL_OPTION);
+                    if(res==0){
+                        //deleting from db
+                        deleteDataFromDB(p);
+                    }
+                    else{
+                        //refused to delete
+                        JOptionPane.showMessageDialog(null, "Thanks for choosing to stay :)","Not Deleted",JOptionPane.PLAIN_MESSAGE);
+                    }
+                }
                 //clear after submit
                 tfdel.setText("");
-                bgdelete.clearSelection();
+                // bgdelete.clearSelection();
             }
         });
     }
